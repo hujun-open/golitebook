@@ -1,0 +1,51 @@
+// golitebook plugin API
+syntax = "proto3";
+option go_package = "golitebook/api";
+package api;
+import "google/protobuf/timestamp.proto";
+
+message Empty {}
+
+message SearchReq {
+    string Keyword =1;
+}
+message SearchBookResp {
+    string BookName=1;
+    string BookPageURL=2;
+    string BookSize=3;
+    string AuthorName=4;
+    string Status=5;
+    google.protobuf.Timestamp LastUpdate =6;
+}
+
+message SearchResp { repeated SearchBookResp ResultList = 1; }
+
+message PluginDesc {
+    string Desc=1;
+}
+message GetBookInfoReq{
+    string BookPageURL = 1;
+}
+message GetBookInfoResp {
+    uint32 TotalChapterCount =1;
+    string LastChapterName =2;
+    string BookIndexURL =3;
+}
+message GetBookReq {
+    string BookIndexURL = 1;
+    bool UpdateOnly =2;
+    uint32 CurrentChaptCount  =3;
+}
+message GetChapterResp {
+    string ChapterContent = 1;
+    uint32 ChapterId  =2;
+    string ChapterName =3;
+}
+
+service GoLitebookPlugin {
+    rpc Search(SearchReq) returns (SearchResp);
+    rpc GetDesc(Empty) returns (PluginDesc);
+    rpc GetBookInfo(GetBookInfoReq) returns (GetBookInfoResp);
+    rpc GetBook(GetBookReq) returns (stream GetChapterResp);
+    rpc Keepalive(stream Empty) returns (Empty);
+}
