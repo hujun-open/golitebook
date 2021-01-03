@@ -1,4 +1,4 @@
-module golitebook
+module github.com/hujun-open/golitebook
 
 go 1.14
 
