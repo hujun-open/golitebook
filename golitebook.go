@@ -17,16 +17,16 @@ import (
 	"fyne.io/fyne/app"
 )
 
-//TODO:1. change background 2.change look 4. change font 5.add paragraph prefix via liteview
 func main() {
 	if mainwindow.VERSION != "" {
 		logfpath := filepath.Join(conf.ConfDir(), "litebook.log")
 		f, err := os.OpenFile(logfpath, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
-			log.Fatal("failed to open log file")
+			log.Printf("failed to open log file")
+		} else {
+			log.SetOutput(f)
+			defer f.Close()
 		}
-		log.SetOutput(f)
-		defer f.Close()
 	}
 	profile := flag.Bool("p", false, "enable profiling")
 	fileToOpen := flag.String("f", "", "file to open")
