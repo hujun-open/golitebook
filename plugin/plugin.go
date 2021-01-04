@@ -6,9 +6,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"golitebook/api"
-	"golitebook/char"
-	"golitebook/conf"
 	"io"
 	"io/ioutil"
 	"log"
@@ -18,6 +15,10 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/hujun-open/golitebook/api"
+	"github.com/hujun-open/golitebook/char"
+	"github.com/hujun-open/golitebook/conf"
 
 	// "fyne.io/fyne/dialog"
 

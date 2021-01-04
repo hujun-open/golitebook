@@ -3,15 +3,16 @@ package main
 
 import (
 	"flag"
-	"golitebook/conf"
-	"golitebook/mainwindow"
-	_ "golitebook/plugin"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
 	"path/filepath"
 	"runtime"
+
+	"github.com/hujun-open/golitebook/conf"
+	"github.com/hujun-open/golitebook/mainwindow"
+	_ "github.com/hujun-open/golitebook/plugin"
 
 	"fyne.io/fyne/app"
 )

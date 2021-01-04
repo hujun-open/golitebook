@@ -2,7 +2,7 @@
 package toc
 
 import (
-	"golitebook/plugin"
+	"github.com/hujun-open/golitebook/plugin"
 	// "log"
 	"sort"
 

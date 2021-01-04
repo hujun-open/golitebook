@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"golitebook/liteview"
+	"github.com/hujun-open/golitebook/liteview"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/storage"

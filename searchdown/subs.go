@@ -3,7 +3,8 @@ package searchdown
 
 import (
 	"fmt"
-	"golitebook/plugin"
+
+	"github.com/hujun-open/golitebook/plugin"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/dialog"

@@ -3,12 +3,6 @@ package mainwindow
 
 import (
 	"fmt"
-	"golitebook/char"
-	"golitebook/conf"
-	"golitebook/history"
-	"golitebook/plugin"
-	"golitebook/searchdown"
-	"golitebook/toc"
 	"io/ioutil"
 	"log"
 	"os"
@@ -16,6 +10,13 @@ import (
 	"sort"
 	"sync/atomic"
 	"time"
+
+	"github.com/hujun-open/golitebook/char"
+	"github.com/hujun-open/golitebook/conf"
+	"github.com/hujun-open/golitebook/history"
+	"github.com/hujun-open/golitebook/plugin"
+	"github.com/hujun-open/golitebook/searchdown"
+	"github.com/hujun-open/golitebook/toc"
 
 	"fyne.io/fyne"
 	// "fyne.io/fyne/canvas"

@@ -3,9 +3,10 @@ package history
 
 import (
 	"encoding/json"
-	"golitebook/conf"
 	"io/ioutil"
 	"path/filepath"
+
+	"github.com/hujun-open/golitebook/conf"
 )
 
 func getHistoryFilePath() string {

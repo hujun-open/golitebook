@@ -3,8 +3,9 @@ package searchdown
 
 import (
 	"fmt"
-	"golitebook/plugin"
 	"sync"
+
+	"github.com/hujun-open/golitebook/plugin"
 
 	// "log"
 	"strings"
