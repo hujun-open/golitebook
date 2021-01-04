@@ -191,6 +191,7 @@ func (win *LBWindow) getHelpStr() string {
 翻页: PageUp, PageDown, Left, Right, Space
 首页: Home
 末页: End
+放大缩小字体： =/-
 	`
 	verStr := VERSION
 	if verStr == "" {

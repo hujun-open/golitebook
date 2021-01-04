@@ -19,6 +19,7 @@ Contrl-H 显示简单帮助
 * 翻页: PageUp, PageDown, Left, Right, Space
 * 首页: Home
 * 末页: End
+* 放大缩小字体： =/-
 
 ## 功能快捷键
 
