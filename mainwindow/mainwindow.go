@@ -25,7 +25,7 @@ import (
 	"fyne.io/fyne/layout"
 	"fyne.io/fyne/storage"
 
-	"golitebook/liteview"
+	"github.com/hujun-open/golitebook/liteview"
 
 	"github.com/hujun-open/sbar"
 	"github.com/hujun-open/tiledback"
