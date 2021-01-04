@@ -433,16 +433,18 @@ func (win *LBWindow) openFile() {
 		win.openFileDiag = dialog.NewFileOpen(win.loadFile, win)
 		win.openFileDiag.SetDismissText("打开")
 	}
-	lastdiruri, err := storage.Parent(storage.NewURI(win.cfg.LastFile))
-	if err == nil {
-		lurl, err := storage.ListerForURI(lastdiruri)
+	if win.cfg.LastFile != "" {
+		lastdiruri, err := storage.Parent(storage.NewURI(win.cfg.LastFile))
 		if err == nil {
-			win.openFileDiag.SetLocation(lurl)
+			lurl, err := storage.ListerForURI(lastdiruri)
+			if err == nil {
+				win.openFileDiag.SetLocation(lurl)
+			} else {
+				log.Printf("failed to get lister, %v", err)
+			}
 		} else {
-			log.Printf("failed to get lister, %v", err)
+			log.Printf("failed to get parent, %v", err)
 		}
-	} else {
-		log.Printf("failed to get parent, %v", err)
 	}
 	win.openFileDiag.Show()
 }
