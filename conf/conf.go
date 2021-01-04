@@ -34,6 +34,7 @@ func NewDefConfig() (cfg *Config, err error) {
 	cfg = &Config{
 		LastFile:       "",
 		BackgroundFile: "",
+		LastWinSize:    fyne.NewSize(1000, 800),
 	}
 	cfg.Theme, err = defaultLook()
 	return
