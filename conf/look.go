@@ -22,7 +22,7 @@ func GetExecDir() string {
 
 func fontDirList() []string {
 	return []string{
-		"",
+		GetExecDir(),
 		ConfDir(),
 	}
 }
