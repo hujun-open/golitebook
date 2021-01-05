@@ -1,6 +1,7 @@
 # 简介
 golitebook 是一个看书软件， 关键功能如下：
 
+* 支持快速载入并排版大型txt文件（100M文本文件载入只需花费1秒左右）
 * 支持Unicode
 * 通过插件支持从网站搜索，下载并更新小说
 * 简约设计，所有操作都可以通过快捷键实现
@@ -82,3 +83,9 @@ Linux: $XDG_CONFIG_HOME（如其为空，则$HOME/.config)
 OSX: $HOME/Library/Application Support
 
 注：golitebook并不包括任何插件
+
+# 支持操作系统
+
+* Windows
+* Linux （已知限制：中文输入法无法工作，只能在其他软件输入再粘贴过来）
+* MAC OSX (TBR)
