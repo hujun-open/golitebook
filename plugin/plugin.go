@@ -217,7 +217,11 @@ func getPluginDirectory() string {
 var LoadedPlugins PluginList
 
 func init() {
-	LoadedPlugins, _ = newPluginList(getPluginDirectory())
+	var err error
+	LoadedPlugins, err = newPluginList(getPluginDirectory())
+	if err != nil {
+		log.Printf("failed to load plugin, %v", err)
+	}
 	CurrentSubscriptions = NewSubscriptionList()
 	CurrentSubscriptions.Load()
 }
@@ -401,7 +405,13 @@ func (sub *Subscription) UnmarshalJSON(buf []byte) error {
 	sub.lastDownloadTime = out.LastDownloadTime
 	sub.finished = DownloadResultNotStarted
 	sub.mux = new(sync.RWMutex)
-	sub.client = LoadedPlugins[sub.pluginName].Client
+
+	if p, ok := LoadedPlugins[sub.pluginName]; ok {
+		sub.client = p.Client
+	} else {
+		return fmt.Errorf("failed to load plugin %v", sub.pluginName)
+	}
+
 	sub.statusTxt = ""
 	return nil
 }
