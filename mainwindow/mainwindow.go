@@ -18,12 +18,13 @@ import (
 	"github.com/hujun-open/golitebook/searchdown"
 	"github.com/hujun-open/golitebook/toc"
 
-	"fyne.io/fyne"
+	"fyne.io/fyne/v2"
 	// "fyne.io/fyne/canvas"
-	"fyne.io/fyne/dialog"
-	"fyne.io/fyne/driver/desktop"
-	"fyne.io/fyne/layout"
-	"fyne.io/fyne/storage"
+	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/driver/desktop"
+	"fyne.io/fyne/v2/layout"
+	"fyne.io/fyne/v2/storage"
+	"fyne.io/fyne/v2/theme"
 
 	"github.com/hujun-open/golitebook/liteview"
 
@@ -98,7 +99,9 @@ func NewLBWindow(myApp fyne.App, filename string) (*LBWindow, error) {
 	if filename != "" {
 		uri = storage.NewFileURI(filename)
 	}
-	r.loadFileFromURI(uri)
+	if uri != nil {
+		r.loadFileFromURI(uri)
+	}
 	r.helpWin = dialog.NewInformation("帮助", r.getHelpStr(), r)
 	r.helpWin.Hide()
 	icon, _ := fyne.LoadResourceFromPath(filepath.Join(conf.GetExecDir(), "icon.png"))
@@ -301,7 +304,7 @@ func (win *LBWindow) onClose() {
 
 	os.MkdirAll(conf.ConfDir(), 0755)
 	win.cfg.LastWinSize = win.Canvas().Size()
-	win.cfg.Theme.SetTextSize(fyne.CurrentApp().Settings().Theme().TextSize())
+	win.cfg.Theme.SetTextSize(fyne.CurrentApp().Settings().Theme().Size(theme.SizeNameText))
 	err := conf.SaveConfigFile(win.cfg)
 	if err != nil {
 		dialog.ShowError(fmt.Errorf("failed to save config, %v", err), win)
@@ -380,11 +383,10 @@ func (win *LBWindow) loadFont(furl fyne.URIReadCloser, err error) {
 		dialog.ShowError(err, win)
 		return
 	}
-	win.cfg.Theme.SetFont(res)
+	win.cfg.Theme.SetFont(res, furl.URI().String())
 	fyne.CurrentApp().Settings().SetTheme(win.cfg.Theme)
 	time.Sleep(100 * time.Millisecond) //this delay is needed, otherwise the font change won't take effect
 	win.lv.SetBytes(win.lv.GetVal())
-	win.cfg.Theme.RegularFontPath = furl.URI().String()
 }
 
 func (win *LBWindow) loadFile(furl fyne.URIReadCloser, err error) {

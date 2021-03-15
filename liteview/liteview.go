@@ -11,11 +11,11 @@ import (
 	// "log"
 	"sync"
 
-	"fyne.io/fyne"
-	"fyne.io/fyne/canvas"
-	"fyne.io/fyne/driver/desktop"
-	"fyne.io/fyne/theme"
-	"fyne.io/fyne/widget"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/driver/desktop"
+	"fyne.io/fyne/v2/theme"
+	"fyne.io/fyne/v2/widget"
 )
 
 const measureChar = "我"
@@ -43,14 +43,14 @@ func getNumLeadingSpaces(leadingCount int) int {
 	}
 	targetwidth := fyne.MeasureText(measureStr, theme.TextSize(), fyne.TextStyle{}).Width
 	spaceWidth := fyne.MeasureText(" ", theme.TextSize(), fyne.TextStyle{}).Width
-	return targetwidth/spaceWidth + 1
+	return int(targetwidth/spaceWidth) + 1
 }
 
 // input val is a single line of rune, return number of chars n
 // so that val[txtpos:txtpos+n] fits in width wid;
 // unitWid is the avg single char widwth;
-func lineChars(val []rune, txtpos, wid, unitWid int) int {
-	amount := wid / unitWid
+func lineChars(val []rune, txtpos int, wid, unitWid float32) int {
+	amount := int(wid / unitWid)
 	lineLen := len(val)
 	if txtpos >= lineLen || txtpos < 0 {
 		return 0
@@ -83,7 +83,7 @@ func lineChars(val []rune, txtpos, wid, unitWid int) int {
 // unitWid is the avg single char width;
 // if reverse if true, then working on the line[:txtpos] part,
 // otherwise working on line[txtpos:] part
-func breakLine(line []rune, lineid, txtpos, wid, unitWid int, reverse bool) (lines []*renderLine, lastpos int) {
+func breakLine(line []rune, lineid, txtpos int, wid, unitWid float32, reverse bool) (lines []*renderLine, lastpos int) {
 	if len(line) == 0 {
 		lines = append(lines,
 			&renderLine{
@@ -153,8 +153,8 @@ func newLiteViewRender(lv *LiteView) *liteViewRender {
 }
 
 // calAllowedLines calculate the max lines allowed with height h
-func (lvr *liteViewRender) calAllowedLines(h int) int {
-	return h / lvr.unitSize.Height
+func (lvr *liteViewRender) calAllowedLines(h float32) int {
+	return int(h / lvr.unitSize.Height)
 }
 
 func (lvr *liteViewRender) calUnitSize() (usize fyne.Size) {
@@ -171,7 +171,7 @@ func (lvr *liteViewRender) Layout(layoutsize fyne.Size) {
 	if workingArea.Width <= 0 || workingArea.Height <= 0 {
 		return
 	}
-	allowedLines := lvr.calAllowedLines(workingArea.Height)
+	allowedLines := int(lvr.calAllowedLines(workingArea.Height))
 	if allowedLines == 0 {
 		return
 	}
@@ -198,7 +198,7 @@ L1:
 		for _, line := range brokenlines {
 			t := canvas.NewText(string(line.text), theme.TextColor())
 			txtLineStartPos := fyne.NewPos(lvr.lv.sidePadding,
-				lvr.lv.verticalPadding+numFormatLines*(lvr.unitSize.Height)+lvr.lv.lineVerticalPadding)
+				lvr.lv.verticalPadding+float32(numFormatLines)*(lvr.unitSize.Height)+lvr.lv.lineVerticalPadding)
 			// log.Printf("line %d pos at Y %d", txtLine, txtLineStartPos.Y)
 			t.Move(txtLineStartPos)
 			lvr.overallContainer.Add(t)
@@ -628,7 +628,7 @@ type LiteView struct {
 	StartLine, StartLinePos                           int
 	posEvtHandler                                     func(int, int)
 	parent                                            fyne.Window
-	verticalPadding, sidePadding, lineVerticalPadding int
+	verticalPadding, sidePadding, lineVerticalPadding float32
 	numberOfLeadingSpaces                             *uint32
 }
 
@@ -816,7 +816,7 @@ func (lv *LiteView) JumpTo(lineid, linepos int, centralview bool) {
 }
 
 func (lv *LiteView) Scrolled(evt *fyne.ScrollEvent) {
-	if evt.DeltaY < 0 {
+	if evt.Scrolled.DY < 0 {
 		lv.renderAct(actScrollLineDown)
 	} else {
 		lv.renderAct(actScrollLineUp)

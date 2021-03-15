@@ -14,7 +14,7 @@ import (
 	"github.com/hujun-open/golitebook/mainwindow"
 	_ "github.com/hujun-open/golitebook/plugin"
 
-	"fyne.io/fyne/app"
+	"fyne.io/fyne/v2/app"
 )
 
 func main() {

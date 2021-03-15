@@ -12,10 +12,10 @@ import (
 
 	// "time"
 
-	"fyne.io/fyne"
-	"fyne.io/fyne/dialog"
-	"fyne.io/fyne/layout"
-	"fyne.io/fyne/widget"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/layout"
+	"fyne.io/fyne/v2/widget"
 	"github.com/hujun-open/dvlist"
 )
 
@@ -162,7 +162,7 @@ func (down *Downloader) ShowSearchDiag() {
 func (down *Downloader) ShowSubsWin() {
 	if down.subsDiag == nil {
 		down.subsDiag = NewSubscriptionWin(plugin.CurrentSubscriptions, down)
-		down.subsDiag.Resize(fyne.NewSize(1000, 200))
+		down.subsDiag.Resize(fyne.NewSize(1000.0, 200.0))
 	}
 	down.subsDiag.Show()
 }
