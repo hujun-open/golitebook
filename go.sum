@@ -56,6 +56,8 @@ github.com/google/go-cmp v0.5.0/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/hujun-open/dvlist v0.2.0 h1:eWYa424GJGtXK1RCYT88zjlid46RylBwrUNYKexTCCI=
 github.com/hujun-open/dvlist v0.2.0/go.mod h1:Pgdc8ibEiJfAUzzxuY8T51ksYPAvl456NzVULAqgcGg=
+github.com/hujun-open/dvlist v0.3.0 h1:zmJa0FueXVFcXZ185h6S4CPStOkGarQ/m2h8h69J710=
+github.com/hujun-open/dvlist v0.3.0/go.mod h1:Pgdc8ibEiJfAUzzxuY8T51ksYPAvl456NzVULAqgcGg=
 github.com/hujun-open/sbar v0.1.1/go.mod h1:7pFrQ6EucxB4EQBRa2gMt5WrDqvaPi6fwE3SopuDvW0=
 github.com/hujun-open/sbar v0.2.0 h1:Q5kPlHnHSjzyoqiEoqEbo8FqChZ0++Z+DxvEr7rDeAk=
 github.com/hujun-open/sbar v0.2.0/go.mod h1:1rjqtBsSQzH1DC5fR80MjGLR9YNgQzRPYayoe2tJuE4=
