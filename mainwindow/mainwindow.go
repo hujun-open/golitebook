@@ -65,6 +65,10 @@ func NewLBWindow(myApp fyne.App, filename string) (*LBWindow, error) {
 		r.Canvas().AddShortcut(s.skey, s.handler)
 	}
 	var err error
+	err = plugin.InitPlugins()
+	if err != nil {
+		return nil, err
+	}
 	r.cfg, err = conf.LoadConfigFile()
 	if err != nil {
 		log.Printf("failed to load config, %v", err)

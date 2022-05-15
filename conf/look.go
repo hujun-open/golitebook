@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"image/color"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -86,11 +87,12 @@ func (lk *Look) UnmarshalJSON(b []byte) error {
 	}
 	var err error
 	lkcnf.FontPath = strings.TrimSpace(lkcnf.FontPath)
-	lk.font, err = loadFontViaURI(storage.NewURI(lkcnf.FontPath))
+	lk.font, err = loadFontViaURI(storage.NewFileURI(lkcnf.FontPath))
 	if err != nil {
+		log.Printf("failed to load font file %v, %v", lkcnf, err)
 		lk.font, lk.fontPath, err = loadDefaultFont()
 		if err != nil {
-			return fmt.Errorf("faild to load font file and default font file")
+			return fmt.Errorf("faild to load default font file,%w", err)
 		}
 	}
 	lk.fontPath = lkcnf.FontPath

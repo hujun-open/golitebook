@@ -216,14 +216,27 @@ func getPluginDirectory() string {
 
 var LoadedPlugins PluginList
 
-func init() {
+func InitPlugins() error {
+	log.SetFlags(log.Ltime | log.Lshortfile)
 	var err error
+	pDir := getPluginDirectory()
+	if _, err = os.Stat(pDir); os.IsNotExist(err) {
+		//plugin folder doesn't exists, create one
+		err = os.MkdirAll(pDir, 0755)
+		if err != nil {
+			return fmt.Errorf("failed to created plugin folder %v, %w", pDir, err)
+		}
+	}
 	LoadedPlugins, err = newPluginList(getPluginDirectory())
 	if err != nil {
-		log.Printf("failed to load plugin, %v", err)
+		return fmt.Errorf("failed to load plugin, %v", err)
 	}
 	CurrentSubscriptions = NewSubscriptionList()
-	CurrentSubscriptions.Load()
+	err = CurrentSubscriptions.Load()
+	if err != nil {
+		log.Printf("failed to load subscriptions, %v", err)
+	}
+	return nil
 }
 
 const (

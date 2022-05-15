@@ -12,7 +12,8 @@ import (
 
 	"github.com/hujun-open/golitebook/conf"
 	"github.com/hujun-open/golitebook/mainwindow"
-	_ "github.com/hujun-open/golitebook/plugin"
+
+	// _ "github.com/hujun-open/golitebook/plugin"
 
 	"fyne.io/fyne/v2/app"
 )
