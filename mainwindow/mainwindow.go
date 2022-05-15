@@ -438,7 +438,6 @@ func (win *LBWindow) openFileviaShortcut(fyne.Shortcut) {
 func (win *LBWindow) openFile() {
 	if win.openFileDiag == nil {
 		win.openFileDiag = dialog.NewFileOpen(win.loadFile, win)
-		win.openFileDiag.SetDismissText("打开")
 	}
 	if win.cfg.LastFile != "" {
 		lastdiruri, err := storage.Parent(storage.NewURI(win.cfg.LastFile))
